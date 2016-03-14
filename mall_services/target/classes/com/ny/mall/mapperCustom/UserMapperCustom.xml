@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ny.mall.mapperCustom.UserMapperCustom" >
+
+		<sql id="User_query_where">
+			
+			
+			
+			<if test="userCustom!=null">
+			
+			
+			<if test="userCustom.userName!=null and userCustom.userName!=''">
+				
+				and user.user_name like '%${userCustom.userName}%'
+				
+			</if>
+			<if test="userCustom.userNo!=null and userCustom.userNo!=''">
+				
+				and user.user_no like '%${userCustom.userNo}%'
+				
+			</if>
+			<if test="userCustom.userAge!=null">
+				
+				and user.user_age = #{userCustom.userAge}
+				
+			</if>
+			<if test="userCustom.userSex!=null and userCustom.userSex!=''">
+				
+				and user.user_sex = #{userCustom.userSex}
+				
+			</if>
+			
+			
+			
+			</if>
+				
+			
+		
+			
+		</sql>
+
+  		
+  		<select id="findEntityList" resultType="com.ny.mall.pojoAndVo.UserCustom" parameterType="com.ny.mall.pojoAndVo.UserCustomVo">
+  			
+  			select user_id userId,user_name userName,user_no userNo,user_age userAge,user_sex userSex from user 
+  			
+  			<where>
+  			<include refid="User_query_where"></include>
+  			</where>
+  			
+  			<if test="pageQuery!=null">
+			<if test="pageQuery.PageQuery_pageSize!=null and pageQuery.PageQuery_start!=null ">
+				limit #{pageQuery.PageQuery_start},#{pageQuery.PageQuery_pageSize}
+			</if>
+		</if>
+  			
+  		
+  		</select>
+  		
+  		<select id="findEntityCount" resultType="int" parameterType="com.ny.mall.pojoAndVo.UserCustomVo">
+  			
+  			select count(user_id) from user 
+  			
+  			<where>
+  			
+  			<include refid="User_query_where"></include>
+  			
+  			</where>
+  		
+  		</select>
+  		
+  		
+</mapper>

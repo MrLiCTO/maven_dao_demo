@@ -1,0 +1,74 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+    <parent>
+		<relativePath>../parent</relativePath>
+		<groupId>com.ny</groupId>
+ 		 <artifactId>parent</artifactId>
+ 		 <version>0.0.1-SNAPSHOT</version>
+		
+	</parent>
+  
+  <groupId>com.ny.mall</groupId>
+  <artifactId>customers</artifactId>
+  <packaging>war</packaging>
+  <name>controllers Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>com.ny</groupId>
+ 		 <artifactId>utils</artifactId>
+ 		 <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ny.mall</groupId>
+  <artifactId>entitys</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ny.mall</groupId>
+  	<artifactId>services</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>mall</finalName>
+      <plugins>		
+			<!-- war包生成插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+				</configuration>
+			</plugin>
+			<!-- tomcat运行插件 -->
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.2.3</version>
+				<configuration>
+					<container>
+						<containerId>tomcat7x</containerId>
+						<home>D:\apache-tomcat-7.0.67</home>
+					</container>
+					<configuration>
+						<type>existing</type>
+						<home>D:\apache-tomcat-7.0.67</home>
+					</configuration>
+				</configuration>
+				<executions>
+					<execution>
+						<id>cargo-run</id>
+						<phase>install</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+  </build>
+</project>
